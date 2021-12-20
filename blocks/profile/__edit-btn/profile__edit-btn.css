@@ -1,0 +1,13 @@
+.profile__edit-btn {
+  grid-area: button;
+  margin: 7px 0 0 18px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  background-image: url(../../../images/edit-btn.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  cursor: pointer;
+}

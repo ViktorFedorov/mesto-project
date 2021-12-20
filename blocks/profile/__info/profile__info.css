@@ -1,0 +1,10 @@
+.profile__info {
+  display: grid;
+  align-items: center;
+  color: #fff;
+  margin-right: 20%;
+
+  grid-template-areas:
+  	"name button"
+  	"description description";
+}

@@ -1,0 +1,6 @@
+.card__image-container {
+  font-size: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  overflow: hidden;
+}
