@@ -6,3 +6,27 @@
   padding: 0 200px;
 }
 
+@media screen and (max-width: 1080px) {
+  .content {
+    padding: 0 120px;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .content {
+    padding: 0 80px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .content {
+    padding: 0 40px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .content {
+    padding: 0 19px;
+  }
+}
+

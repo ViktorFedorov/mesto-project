@@ -2,9 +2,21 @@
   display: grid;
   align-items: center;
   color: #fff;
-  margin-right: 20%;
+  margin-right: 24%;
 
   grid-template-areas:
   	"name button"
   	"description description";
+}
+
+@media screen and (max-width: 1210px) {
+  .profile__info {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .profile__info {
+    margin-bottom: 35px;
+  }
 }
