@@ -1,0 +1,7 @@
+.hover-effect-save-btn {
+  transition: opacity .15s linear;
+}
+
+.hover-effect-save-btn:hover {
+  opacity: 80%;
+}

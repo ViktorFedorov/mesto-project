@@ -1,0 +1,7 @@
+.hover-effect {
+  transition: opacity .15s linear;
+}
+
+.hover-effect:hover {
+  opacity: 60%;
+}

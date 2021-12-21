@@ -9,3 +9,11 @@
   background-size: cover;
   cursor: pointer;
 }
+
+@media screen and (max-width: 630px) {
+  .popup__close-btn {
+    width: 20px;
+    height: 20px;
+    right: 0;
+  }
+}
