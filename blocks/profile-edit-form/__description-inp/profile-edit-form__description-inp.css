@@ -1,0 +1,15 @@
+.profile-edit-form__description-inp {
+	display: block;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.2;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, .2);
+	padding: 10px 0;
+	margin-top: 20px;
+}
+
+.profile-edit-form__description-inp:focus {
+	outline: none;
+}
