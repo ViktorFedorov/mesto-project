@@ -1,8 +1,9 @@
-@import url(normalize.css);
-@import url(fonts.css);
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts.css);
 
 @import url(../blocks/page/page.css);
 @import url(../blocks/content/content.css);
+@import url(../blocks/content/__negative-margin/content__negative-margin.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -42,4 +43,5 @@
 @import url(../blocks/profile-edit-form/__save-inp/profile-edit-form__save-inp.css);
 
 @import url(../blocks/hover-effect-save-btn/hover-effect-save-btn.css);
+@import url(../blocks/hover-effect-like-btn/hover-effect-like-btn.css);
 @import url(../blocks/hover-effect/hover-effect.css);

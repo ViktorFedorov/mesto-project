@@ -1,0 +1,5 @@
+@media screen and (max-width: 430px) {
+  .content__negative-margin {
+    margin: 0 -19px;
+  }
+}

@@ -10,3 +10,9 @@
     flex-direction: column;
   }
 }
+
+@media screen and (max-width: 430px) {
+  .profile {
+    padding-bottom: 36px;
+  }
+}

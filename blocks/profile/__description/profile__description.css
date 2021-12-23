@@ -2,7 +2,7 @@
   margin: 0;
   grid-area: description;
   font-size: 18px;
-  line-height: 1.2;
+  line-height: 22px;
   font-weight: 400;
   padding-top: 12px;
 }
@@ -17,5 +17,11 @@
   .profile__description {
     font-size: 14px;
     justify-self: center;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .profile__description {
+    padding-top: 8px;
   }
 }
