@@ -1,4 +1,4 @@
-.profile-edit-form__description-inp {
+.profile-edit-form__input {
 	display: block;
 	font-size: 14px;
 	font-weight: 400;
@@ -10,6 +10,6 @@
 	margin-top: 20px;
 }
 
-.profile-edit-form__description-inp:focus {
+.profile-edit-form__input:focus {
 	outline: none;
 }

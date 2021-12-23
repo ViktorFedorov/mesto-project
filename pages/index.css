@@ -39,8 +39,8 @@
 
 @import url(../blocks/profile-edit-form/profile-edit-form.css);
 @import url(../blocks/profile-edit-form/__description-inp/profile-edit-form__description-inp.css);
-@import url(../blocks/profile-edit-form/__name-inp/profile-edit-form__name-inp.css);
-@import url(../blocks/profile-edit-form/__save-inp/profile-edit-form__save-inp.css);
+@import url(../blocks/profile-edit-form/__input/profile-edit-form__input.css);
+@import url(../blocks/profile-edit-form/__save-btn/profile-edit-form__save-btn.css);
 
 @import url(../blocks/hover-effect-save-btn/hover-effect-save-btn.css);
 @import url(../blocks/hover-effect-like-btn/hover-effect-like-btn.css);
