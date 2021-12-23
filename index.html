@@ -22,68 +22,58 @@
           <img class="profile__image" src="./images/avatar.jpg" alt="аватар пользователя">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-btn hover-effect" type="button"></button>
+          <button class="profile__edit-btn hover-effect" type="button" aria-label="Редактировать профиль"></button>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="profile__add-btn hover-effect" type="button"></button>
+        <button class="profile__add-btn hover-effect" type="button" aria-label="Добавить пользователя"></button>
       </section>
 
       <section class="gallery">
         <article class="card">
-            <img class="card__image" src="./images/place1.jpg" alt="древний храм на фоне гор">
+          <img class="card__image" src="./images/place1.jpg" alt="древний храм на фоне гор">
           <div class="card__description">
-            <p class="card__title">Карачаевск</p>
-            <button class="card__like-btn hover-effect-like-btn" type="button"></button>
+            <h2 class="card__title">Карачаевск</h2>
+            <button class="card__like-btn hover-effect-like-btn" type="button" aria-label="Понравилось"></button>
           </div>
         </article>
 
         <article class="card">
-          <div class="card__image-container">
-            <img class="card__image" src="./images/place2.jpg" alt="гора на рассвете из далека">
-          </div>
+          <img class="card__image" src="./images/place2.jpg" alt="гора на рассвете из далека">
           <div class="card__description">
-            <p class="card__title">Гора Эльбрус</p>
-            <button class="card__like-btn hover-effect-like-btn" type="button"></button>
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button class="card__like-btn hover-effect-like-btn" type="button" aria-label="Понравилось"></button>
           </div>
         </article>
 
         <article class="card">
-          <div class="card__image-container">
-            <img class="card__image" src="./images/place3.jpg" alt="снежный горный пик">
-          </div>
+          <img class="card__image" src="./images/place3.jpg" alt="снежный горный пик">
           <div class="card__description">
-            <p class="card__title">Домбай</p>
-            <button class="card__like-btn hover-effect-like-btn card__like-btn_active" type="button"></button>
+            <h2 class="card__title">Домбай</h2>
+            <button class="card__like-btn hover-effect-like-btn" type="button" aria-label="Понравилось"></button>
           </div>
         </article>
 
         <article class="card">
-          <div class="card__image-container">
-            <img class="card__image" src="./images/place4.jpg" alt="вид с высоты на реку">
-          </div>
+          <img class="card__image" src="./images/place4.jpg" alt="вид с высоты на реку">
           <div class="card__description">
-            <p class="card__title">Ленские столбы</p>
-            <button class="card__like-btn hover-effect-like-btn" type="button"></button>
+            <h2 class="card__title">Ленские столбы</h2>
+            <button class="card__like-btn hover-effect-like-btn" type="button" aria-label="Понравилось"></button>
           </div>
         </article>
 
         <article class="card">
-          <div class="card__image-container">
-            <img class="card__image" src="./images/place5.jpg" alt="невский проспект дом зингера">
-          </div>
+          <img class="card__image" src="./images/place5.jpg" alt="невский проспект дом зингера">
           <div class="card__description">
-            <p class="card__title">Санкт-Петербург</p>
-            <button class="card__like-btn hover-effect-like-btn card__like-btn_active" type="button"></button>
+            <h2 class="card__title">Санкт-Петербург</h2>
+            <button class="card__like-btn hover-effect-like-btn" type="button" aria-label="Понравилось"></button>
           </div>
         </article>
 
         <article class="card">
-          <div class="card__image-container">
-            <img class="card__image" src="./images/place6.jpg" alt="осенний лес на скалах над озером">
-          </div>
+          <img class="card__image" src="./images/place6.jpg" alt="осенний лес на скалах над озером">
           <div class="card__description">
-            <p class="card__title">Карелия</p>
-            <button class="card__like-btn hover-effect" type="button"></button>
+            <h2 class="card__title">Карелия</h2>
+            <button class="card__like-btn hover-effect-like-btn" type="button" aria-label="Понравилось"></button>
           </div>
         </article>
       </section>
@@ -94,18 +84,15 @@
     </footer>
   </div>
 
-  <!-- add class popup_opened for popup -->
   <div class="popup">
     <div class="popup__container">
       <button class="popup__close-btn hover-effect" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <div class="popup__content">
-        <form action="#" class="profile-edit-form">
-          <input class="profile-edit-form__name-inp" type="text" name="name">
-          <input class="profile-edit-form__description-inp" type="text" name="description">
-          <input class="profile-edit-form__save-inp hover-effect-save-btn" type="submit" value="Сохранить">
-        </form>
-      </div>
+      <form action="#" class="profile-edit-form" name="profile-edit">
+        <input class="profile-edit-form__input profile-edit-form__input_value_name" type="text" name="name">
+        <input class="profile-edit-form__input profile-edit-form__input_value_description" type="text" name="description">
+        <button class="profile-edit-form__save-btn" type="submit">Сохранить</button>
+      </form>
     </div>
   </div>
 
