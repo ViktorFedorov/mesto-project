@@ -1,7 +1,0 @@
-.hover-effect-like-btn {
-  transition: opacity .15s linear;
-}
-
-.hover-effect-like-btn:hover {
-  opacity: 50%;
-}

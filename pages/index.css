@@ -6,11 +6,9 @@
 @import url(../blocks/content/__negative-margin/content__negative-margin.css);
 
 @import url(../blocks/header/header.css);
-@import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/header/__logo-image/header__logo-image.css);
 
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/profile/__image-container/profile__image-container.css);
 @import url(../blocks/profile/__image/profile__image.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
@@ -21,7 +19,6 @@
 @import url(../blocks/gallery/gallery.css);
 
 @import url(../blocks/card/card.css);
-@import url(../blocks/card/__image-container/card__image-container.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__title/card__title.css);
@@ -38,10 +35,7 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 
 @import url(../blocks/profile-edit-form/profile-edit-form.css);
-@import url(../blocks/profile-edit-form/__description-inp/profile-edit-form__description-inp.css);
 @import url(../blocks/profile-edit-form/__input/profile-edit-form__input.css);
 @import url(../blocks/profile-edit-form/__save-btn/profile-edit-form__save-btn.css);
 
-@import url(../blocks/hover-effect-save-btn/hover-effect-save-btn.css);
-@import url(../blocks/hover-effect-like-btn/hover-effect-like-btn.css);
 @import url(../blocks/hover-effect/hover-effect.css);
