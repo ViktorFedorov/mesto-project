@@ -24,7 +24,7 @@
           <button class="profile__edit-btn hover-effect" type="button" aria-label="Редактировать профиль"></button>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="profile__add-btn hover-effect" type="button" aria-label="Добавить пользователя"></button>
+        <button class="profile__add-btn hover-effect" type="button" aria-label="Добавить место"></button>
       </section>
 
       <section class="gallery">
@@ -83,19 +83,52 @@
     </footer>
   </div>
 
-  <div class="popup">
+
+
+
+
+
+  <div class="popup profileEditPopup">
     <div class="popup__container">
       <button class="popup__close-btn hover-effect" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form action="#" class="profile-edit-form" name="profile-edit">
+      <form action="#" class="profile-edit-form edit-form" name="profile-edit">
         <input class="profile-edit-form__input profile-edit-form__input_value_name" type="text" name="name">
-        <input class="profile-edit-form__input profile-edit-form__input_value_description" type="text" name="description">
+        <input class="profile-edit-form__input profile-edit-form__input_value_description" type="text"
+               name="description">
         <button class="profile-edit-form__save-btn" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
 
-  <script src="scripts/scripts.js"></script>
+
+
+
+  <div class="popup addCardPopup">
+    <div class="popup__container">
+      <button class="popup__close-btn hover-effect" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form action="#" class="profile-edit-form add-card-form" name="add-card">
+        <input class="profile-edit-form__input profile-edit-form__input_place_name" placeholder="Название"
+               type="text" name="name">
+        <input class="profile-edit-form__input profile-edit-form__input_place_url"
+               placeholder="Ссылка на картинку" type="text" name="url">
+        <button class="profile-edit-form__save-btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="scripts/modalWindows.js"></script>
 
 </body>
 </html>
