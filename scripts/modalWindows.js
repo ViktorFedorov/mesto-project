@@ -22,10 +22,6 @@ function hidePopup() {
   addCardPopup.classList.remove('popup_opened')
 }
 
-// установка первоначальных значений в поля формы модального окна редактирования профиля
-inpName.value = profileName.textContent
-inpJob.value = profileJob.textContent
-
 // открытие модальных окон
 profileEditBtn.addEventListener('click', () => showPopup(profileEditPopup))
 addCardBtn.addEventListener('click', () => showPopup(addCardPopup))
@@ -43,3 +39,6 @@ profileEditForm.addEventListener('submit', (e) => {
   hidePopup()
 })
 
+// установка первоначальных значений в поля формы модального окна редактирования профиля
+inpName.value = profileName.textContent
+inpJob.value = profileJob.textContent
