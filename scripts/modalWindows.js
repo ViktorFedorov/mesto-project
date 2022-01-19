@@ -1,5 +1,5 @@
-const profileEditPopup = document.querySelector('.profileEditPopup')
-const addCardPopup = document.querySelector('.addCardPopup')
+const profileEditPopup = document.querySelector('.profile-edit-popup')
+const addCardPopup = document.querySelector('.add-card-popup')
 
 const inpName = document.querySelector('.profile-edit-form__input_value_name')
 const inpJob = document.querySelector('.profile-edit-form__input_value_description')
