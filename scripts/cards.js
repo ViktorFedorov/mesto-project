@@ -7,10 +7,11 @@ const inpPlaceUrl = document.querySelector('.profile-edit-form__input_place_url'
 const likeBtns = document.querySelectorAll('.card__like-btn')
 const deleteCardBtns = document.querySelectorAll('.card__trash-icon')
 
+const cardImages = document.querySelectorAll('.card__image')
 const cardTemplate = document.getElementById('card').content
 
 /*
-* подвешивает слушатель события клика на кнопке лайк - вынесено в отдельную функцию, чтобы
+* подвешиваем слушатель события клика на кнопке лайк, делит и изображению - вынесено в отдельную функцию, чтобы
 * использовать и с динамической и со статической разметкой, в перспективе, когда карточки
 * будут динаически подгружаться - можно удалить
 * */
@@ -26,6 +27,13 @@ function handleDeleteCard(elem) {
   })
 }
 
+function handleOpenImage(elem) {
+  elem.addEventListener('click', (e) => {
+    photoPopup.querySelector('.popup__photo').src = e.target.src
+    showPopup(photoPopup)
+  })
+}
+
 function addCard(template, url, title) {
   // клонируем и заполняем элемент карточки
   const card = template.querySelector('.card').cloneNode(true)
@@ -35,6 +43,7 @@ function addCard(template, url, title) {
   // подвешиваем события по клику
   handleClickLike(card.querySelector('.card__like-btn'))
   handleDeleteCard(card.querySelector('.card__trash-icon'))
+  handleOpenImage(card.querySelector('.card__image'))
   return card
 }
 
@@ -55,5 +64,10 @@ for (const likeBtn of likeBtns) {
 
 for (const deleteBtn of deleteCardBtns) {
   handleDeleteCard(deleteBtn)
+}
+
+// вешаем обработчик событий на все фото в карточках (открытие модального окна по клику на фото)
+for (const image of cardImages) {
+  handleOpenImage(image)
 }
 

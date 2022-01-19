@@ -1,5 +1,6 @@
-const profileEditPopup = document.querySelector('.profileEditPopup')
-const addCardPopup = document.querySelector('.addCardPopup')
+const profileEditPopup = document.querySelector('.profile-edit-popup')
+const addCardPopup = document.querySelector('.add-card-popup')
+const photoPopup = document.querySelector('.photo-popup')
 
 const inpName = document.querySelector('.profile-edit-form__input_value_name')
 const inpJob = document.querySelector('.profile-edit-form__input_value_description')
@@ -20,11 +21,19 @@ function showPopup(popup) {
 function hidePopup() {
   profileEditPopup.classList.remove('popup_opened')
   addCardPopup.classList.remove('popup_opened')
+  photoPopup.classList.remove('popup_opened')
 }
 
 // открытие модальных окон
 profileEditBtn.addEventListener('click', () => showPopup(profileEditPopup))
 addCardBtn.addEventListener('click', () => showPopup(addCardPopup))
+
+
+
+
+
+
+
 
 // закрытие модальных окон
 for (const btn of closePopupBtns) {
