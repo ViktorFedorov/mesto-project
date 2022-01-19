@@ -1,5 +1,6 @@
-const profileEditPopup = document.querySelector('.profileEditPopup')
-const addCardPopup = document.querySelector('.addCardPopup')
+const profileEditPopup = document.querySelector('.profile-edit-popup')
+const addCardPopup = document.querySelector('.add-card-popup')
+const photoPopup = document.querySelector('.photo-popup')
 
 const inpName = document.querySelector('.profile-edit-form__input_value_name')
 const inpJob = document.querySelector('.profile-edit-form__input_value_description')
@@ -12,6 +13,7 @@ const addCardBtn = document.querySelector('.profile__add-btn')
 const closePopupBtns = document.querySelectorAll('.popup__close-btn')
 
 const profileEditForm = document.querySelector('.edit-form')
+const cardImages = document.querySelectorAll('.card__image')
 
 function showPopup(popup) {
   popup.classList.add('popup_opened')
@@ -20,11 +22,20 @@ function showPopup(popup) {
 function hidePopup() {
   profileEditPopup.classList.remove('popup_opened')
   addCardPopup.classList.remove('popup_opened')
+  photoPopup.classList.remove('popup_opened')
 }
 
 // открытие модальных окон
 profileEditBtn.addEventListener('click', () => showPopup(profileEditPopup))
 addCardBtn.addEventListener('click', () => showPopup(addCardPopup))
+
+// вешаем обработчик событий на все фото в карточках (открытие модального окна по клику на фото)
+for (const image of cardImages) {
+  image.addEventListener('click', (e) => {
+    photoPopup.querySelector('.popup__photo').src = e.target.src
+    showPopup(photoPopup)
+  })
+}
 
 // закрытие модальных окон
 for (const btn of closePopupBtns) {
