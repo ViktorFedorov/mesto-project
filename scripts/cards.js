@@ -34,7 +34,7 @@ function handleOpenImage(elem) {
   })
 }
 
-function addCard(template, url, title) {
+function createCard(template, url, title) {
   // клонируем и заполняем элемент карточки
   const card = template.querySelector('.card').cloneNode(true)
   card.querySelector('.card__image').src = url
@@ -49,7 +49,7 @@ function addCard(template, url, title) {
 
 addCardForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  gallery.insertAdjacentElement('afterbegin', addCard(cardTemplate, inpPlaceUrl.value, inpPlaceName.value))
+  gallery.insertAdjacentElement('afterbegin', createCard(cardTemplate, inpPlaceUrl.value, inpPlaceName.value))
 
   inpPlaceName.value = ''
   inpPlaceUrl.value = ''
