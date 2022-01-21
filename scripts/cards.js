@@ -58,16 +58,15 @@ addCardForm.addEventListener('submit', (e) => {
 })
 
 // вешаем слушатели события на статическую разметку
-for (const likeBtn of likeBtns) {
+likeBtns.forEach((likeBtn) => {
   handleClickLike(likeBtn)
-}
+})
 
-for (const deleteBtn of deleteCardBtns) {
+deleteCardBtns.forEach((deleteBtn) => {
   handleDeleteCard(deleteBtn)
-}
+})
 
 // вешаем обработчик событий на все фото в карточках (открытие модального окна по клику на фото)
-for (const image of cardImages) {
+cardImages.forEach((image) => {
   handleOpenImage(image)
-}
-
+})
