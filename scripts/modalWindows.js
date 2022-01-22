@@ -28,13 +28,6 @@ function hidePopup() {
 profileEditBtn.addEventListener('click', () => showPopup(profileEditPopup))
 addCardBtn.addEventListener('click', () => showPopup(addCardPopup))
 
-
-
-
-
-
-
-
 // закрытие модальных окон
 for (const btn of closePopupBtns) {
   btn.addEventListener('click', hidePopup)
