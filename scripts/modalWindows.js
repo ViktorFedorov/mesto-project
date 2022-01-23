@@ -10,7 +10,9 @@ const profileJob = document.querySelector('.profile__description')
 
 const profileEditBtn = document.querySelector('.profile__edit-btn')
 const addCardBtn = document.querySelector('.profile__add-btn')
-const closePopupBtns = document.querySelectorAll('.popup__close-btn')
+const closeProfileBtn = document.querySelector('.close-profile')
+const closeAddBtn = document.querySelector('.close-add')
+const closePhotoBtn = document.querySelector('.close-photo')
 
 const profileEditForm = document.querySelector('.edit-form')
 
@@ -18,10 +20,8 @@ function showPopup(popup) {
   popup.classList.add('popup_opened')
 }
 
-function hidePopup() {
-  profileEditPopup.classList.remove('popup_opened')
-  addCardPopup.classList.remove('popup_opened')
-  photoPopup.classList.remove('popup_opened')
+function hidePopup(popup) {
+  popup.classList.remove('popup_opened')
 }
 
 // открытие модальных окон
@@ -29,16 +29,16 @@ profileEditBtn.addEventListener('click', () => showPopup(profileEditPopup))
 addCardBtn.addEventListener('click', () => showPopup(addCardPopup))
 
 // закрытие модальных окон
-for (const btn of closePopupBtns) {
-  btn.addEventListener('click', hidePopup)
-}
+closeProfileBtn.addEventListener('click', () => hidePopup(profileEditPopup))
+closeAddBtn.addEventListener('click', () => hidePopup(addCardPopup))
+closePhotoBtn.addEventListener('click', () => hidePopup(photoPopup))
 
 // сохранение информации в профиле
 profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
   profileName.textContent = inpName.value
   profileJob.textContent = inpJob.value
-  hidePopup()
+  hidePopup(profileEditPopup)
 })
 
 // установка первоначальных значений в поля формы модального окна редактирования профиля

@@ -16,7 +16,13 @@ function handleClickLike(elem) {
 // логика работы кнопки "удалить"
 function handleDeleteCard(elem) {
   elem.addEventListener('click', (e) => {
-    e.target.parentElement.remove()
+    // добавляем класс анимирующий исчезновение
+    e.target.parentElement.classList.add('smooth-disappearance')
+
+    // после окончания анимации удаляем элемент из DOM
+    e.target.addEventListener('transitionend', (e) => {
+      e.target.parentElement.remove()
+    })
   })
 }
 
@@ -34,7 +40,7 @@ function createCard(template, url, title) {
   card.querySelector('.card__image').src = url
   card.querySelector('.card__title').textContent = title
 
-  // подвешиваем события по клику
+  // подвешиваем обработчики событий
   handleClickLike(card.querySelector('.card__like-btn'))
   handleDeleteCard(card.querySelector('.card__trash-icon'))
   handleOpenImage(card.querySelector('.card__image'))
@@ -49,7 +55,7 @@ addCardForm.addEventListener('submit', (e) => {
   inpPlaceName.value = ''
   inpPlaceUrl.value = ''
 
-  hidePopup()
+  hidePopup(addCardPopup)
 })
 
 // отрисовывем карточки из массива

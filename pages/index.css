@@ -26,6 +26,7 @@
 @import url(../blocks/card/__like-btn/card__like-btn.css);
 @import url(../blocks/card/__like-btn/_active/card__like-btn_active.css);
 
+
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
@@ -43,3 +44,4 @@
 @import url(../blocks/profile-edit-form/__save-btn/profile-edit-form__save-btn.css);
 
 @import url(../blocks/hover-effect/hover-effect.css);
+@import url(../blocks/smooth-disappearance/smooth-disappearance.css);
