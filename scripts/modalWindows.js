@@ -2,8 +2,11 @@ const profileEditPopup = document.querySelector('.profile-edit-popup')
 const addCardPopup = document.querySelector('.add-card-popup')
 const photoPopup = document.querySelector('.photo-popup')
 
-const inpName = document.querySelector('.profile-edit-form__input_value_name')
-const inpJob = document.querySelector('.profile-edit-form__input_value_description')
+const photoPopupImage = photoPopup.querySelector('.popup__photo')
+const photoPopupLabel = photoPopup.querySelector('.popup__label')
+
+const inputName = document.querySelector('.profile-edit-form__input_value_name')
+const inputJob = document.querySelector('.profile-edit-form__input_value_description')
 
 const profileName = document.querySelector('.profile__name')
 const profileJob = document.querySelector('.profile__description')
@@ -36,11 +39,11 @@ closePhotoBtn.addEventListener('click', () => hidePopup(photoPopup))
 // сохранение информации в профиле
 profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  profileName.textContent = inpName.value
-  profileJob.textContent = inpJob.value
+  profileName.textContent = inputName.value
+  profileJob.textContent = inputJob.value
   hidePopup(profileEditPopup)
 })
 
 // установка первоначальных значений в поля формы модального окна редактирования профиля
-inpName.value = profileName.textContent
-inpJob.value = profileJob.textContent
+inputName.value = profileName.textContent
+inputJob.value = profileJob.textContent

@@ -1,8 +1,8 @@
 const gallery = document.querySelector('.gallery')
 const addCardForm = document.querySelector('.add-card-form')
 
-const inpPlaceName = document.querySelector('.profile-edit-form__input_place_name')
-const inpPlaceUrl = document.querySelector('.profile-edit-form__input_place_url')
+const inputPlaceName = document.querySelector('.profile-edit-form__input_place_name')
+const inputPlaceUrl = document.querySelector('.profile-edit-form__input_place_url')
 
 const cardTemplate = document.getElementById('card').content
 
@@ -17,19 +17,21 @@ function handleClickLike(elem) {
 function handleDeleteCard(elem) {
   elem.addEventListener('click', (e) => {
     // добавляем класс анимирующий исчезновение
-    e.target.parentElement.classList.add('smooth-disappearance')
+    e.target.closest('.card').classList.add('smooth-disappearance')
 
     // после окончания анимации удаляем элемент из DOM
     e.target.addEventListener('transitionend', (e) => {
-      e.target.parentElement.remove()
+      e.target.closest('.card').remove()
     })
   })
 }
 
 // логика работы открытия модального окна при клике на фото в карточке
-function handleOpenImage(elem) {
+function handleOpenImage(elem, alt) {
   elem.addEventListener('click', (e) => {
-    photoPopup.querySelector('.popup__photo').src = e.target.src
+    photoPopupImage.src = e.target.src
+    photoPopupImage.alt = alt
+    photoPopupLabel.textContent = alt
     showPopup(photoPopup)
   })
 }
@@ -37,23 +39,25 @@ function handleOpenImage(elem) {
 function createCard(template, url, title) {
   // клонируем и заполняем элемент карточки
   const card = template.querySelector('.card').cloneNode(true)
-  card.querySelector('.card__image').src = url
+  const cardImage = card.querySelector('.card__image')
+  cardImage.src = url
+  cardImage.alt = title
   card.querySelector('.card__title').textContent = title
 
   // подвешиваем обработчики событий
   handleClickLike(card.querySelector('.card__like-btn'))
   handleDeleteCard(card.querySelector('.card__trash-icon'))
-  handleOpenImage(card.querySelector('.card__image'))
+  handleOpenImage(cardImage, title)
   return card
 }
 
 // добавление карточки
 addCardForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  gallery.insertAdjacentElement('afterbegin', createCard(cardTemplate, inpPlaceUrl.value, inpPlaceName.value))
+  gallery.insertAdjacentElement('afterbegin', createCard(cardTemplate, inputPlaceUrl.value, inputPlaceName.value))
 
-  inpPlaceName.value = ''
-  inpPlaceUrl.value = ''
+  // очищаем форму
+  e.target.reset()
 
   hidePopup(addCardPopup)
 })
