@@ -43,6 +43,15 @@ document.body.addEventListener('click', (e) => {
   }
 })
 
+// закрытие модальных окон клавишей Esc через делегирование событий
+document.body.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    hidePopup(profileEditPopup)
+    hidePopup(addCardPopup)
+    hidePopup(photoPopup)
+  }
+})
+
 // сохранение информации в профиле
 profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
