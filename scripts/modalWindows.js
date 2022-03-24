@@ -36,6 +36,13 @@ closeProfileBtn.addEventListener('click', () => hidePopup(profileEditPopup))
 closeAddBtn.addEventListener('click', () => hidePopup(addCardPopup))
 closePhotoBtn.addEventListener('click', () => hidePopup(photoPopup))
 
+// закрытие модальных окон кликом по оверлэю через делегирование событий
+document.body.addEventListener('click', (e) => {
+  if (e.target.classList.contains('popup')) {
+    hidePopup(e.target)
+  }
+})
+
 // сохранение информации в профиле
 profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
