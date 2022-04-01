@@ -11,7 +11,7 @@ function toggleSubmitButton(formElement) {
   }
 }
 
-// показать ошибку
+// показать ошибку валидации
 function showError(formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
 
@@ -20,7 +20,7 @@ function showError(formElement, inputElement, errorMessage) {
   errorElement.textContent = errorMessage
 }
 
-// скрыть ошибку
+// скрыть ошибку валидации
 function hideError(formElement, inputElement) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
 
@@ -53,11 +53,11 @@ function setEventListeners(formElement) {
 }
 
 // включаем валидацию для всех форм и отключаем стандартное поведение
-(function enableValidation() {
+export default function() {
   const formList = [...document.querySelectorAll('.profile-edit-form')]
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (e) => e.preventDefault())
     setEventListeners(formElement)
   })
-})()
+}

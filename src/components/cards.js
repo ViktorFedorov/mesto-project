@@ -1,10 +1,8 @@
-const gallery = document.querySelector('.gallery')
-const addCardForm = document.querySelector('.add-card-form')
+import { showPopup } from "./modalWindows.js";
 
-const inputPlaceName = document.querySelector('.profile-edit-form__input_place_name')
-const inputPlaceUrl = document.querySelector('.profile-edit-form__input_place_url')
-
-const cardTemplate = document.getElementById('card').content
+const photoPopup = document.querySelector('.photo-popup')
+const photoPopupImage = photoPopup.querySelector('.popup__photo')
+const photoPopupLabel = photoPopup.querySelector('.popup__label')
 
 // логика работы кнопки "лайк"
 function handleClickLike(elem) {
@@ -36,6 +34,7 @@ function handleOpenImage(elem, alt) {
   })
 }
 
+// создание карточки
 function createCard(template, url, title) {
   // клонируем и заполняем элемент карточки
   const card = template.querySelector('.card').cloneNode(true)
@@ -51,18 +50,9 @@ function createCard(template, url, title) {
   return card
 }
 
-// добавление карточки
-addCardForm.addEventListener('submit', (e) => {
-  e.preventDefault()
-  gallery.prepend(createCard(cardTemplate, inputPlaceUrl.value, inputPlaceName.value))
+export {
+  photoPopup,
+  createCard
+}
 
-  // очищаем форму
-  e.target.reset()
 
-  hidePopup(addCardPopup)
-})
-
-// отрисовывем карточки из массива
-initialCards.forEach((card) => {
-  gallery.prepend(createCard(cardTemplate, card.link, card.name))
-})
