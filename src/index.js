@@ -1,7 +1,8 @@
-import initialCards from '../src/data/initialCards.js'
-import { createCard, photoPopup } from '../src/components/cards.js'
-import { showPopup, hidePopup, profileEditPopup } from "../src/components/modalWindows.js";
-import enableValidation from "../src/components/forms-validation.js";
+import initialCards from './data/initialCards.js'
+import { createCard, photoPopup } from './components/cards.js'
+import { showPopup, hidePopup, profileEditPopup } from "./components/modalWindows.js";
+import enableValidation from "./components/forms-validation.js";
+import './pages/index.css'
 
 const gallery = document.querySelector('.gallery')
 const cardTemplate = document.getElementById('card').content
