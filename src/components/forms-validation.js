@@ -1,63 +1,63 @@
 // изменение состояния кнопки отправки формы в зависимости от валидности формы
-function toggleSubmitButton(formElement) {
-  const submitButton = formElement.querySelector('.profile-edit-form__save-btn')
+function toggleSubmitButton(formElement, settings) {
+  const submitButton = formElement.querySelector(settings.submitButtonSelector)
 
   if (!formElement.checkValidity()) {
     submitButton.setAttribute('disabled', 'disabled')
-    submitButton.classList.add('profile-edit-form__save-btn_state_disabled')
+    submitButton.classList.add(settings.inactiveButtonClass)
   } else {
     submitButton.removeAttribute('disabled')
-    submitButton.classList.remove('profile-edit-form__save-btn_state_disabled')
+    submitButton.classList.remove(settings.inactiveButtonClass)
   }
 }
 
 // показать ошибку валидации
-function showError(formElement, inputElement, errorMessage) {
+function showError(formElement, inputElement, errorMessage, settings) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
 
-  inputElement.classList.add('input-error-enable')
-  errorElement.classList.add('description-error-enable')
+  inputElement.classList.add(settings.inputErrorClass)
+  errorElement.classList.add(settings.errorClass)
   errorElement.textContent = errorMessage
 }
 
 // скрыть ошибку валидации
-function hideError(formElement, inputElement) {
+function hideError(formElement, inputElement, settings) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
 
-  inputElement.classList.remove('input-error-enable')
-  errorElement.classList.remove('description-error-enable')
+  inputElement.classList.remove(settings.inputErrorClass)
+  errorElement.classList.remove(settings.errorClass)
   errorElement.textContent = ''
 }
 
 // валидация одного поля ввода
-function isValid(formElement, inputElement) {
+function isValid(formElement, inputElement, settings) {
   if (!inputElement.validity.valid) {
-    showError(formElement, inputElement, inputElement.validationMessage)
+    showError(formElement, inputElement, inputElement.validationMessage, settings)
   } else {
-    hideError(formElement, inputElement)
+    hideError(formElement, inputElement, settings)
   }
 }
 
 // подвешиваем валидацию на все поля формы
-function setEventListeners(formElement) {
-  const inputList = [...formElement.querySelectorAll('.profile-edit-form__input')]
+function setEventListeners(formElement, settings) {
+  const inputList = [...formElement.querySelectorAll(settings.inputSelector)]
 
-  toggleSubmitButton(formElement)
+  toggleSubmitButton(formElement, settings)
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement)
-      toggleSubmitButton(formElement)
+      isValid(formElement, inputElement, settings)
+      toggleSubmitButton(formElement, settings)
     })
   })
 }
 
 // включаем валидацию для всех форм и отключаем стандартное поведение
-export default function() {
-  const formList = [...document.querySelectorAll('.profile-edit-form')]
+export default function(settings) {
+  const formList = [...document.querySelectorAll(settings.formSelector)]
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (e) => e.preventDefault())
-    setEventListeners(formElement)
+    setEventListeners(formElement, settings)
   })
 }

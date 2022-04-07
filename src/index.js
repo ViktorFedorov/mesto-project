@@ -52,4 +52,11 @@ document.body.addEventListener('keydown', (e) => {
 })
 
 // включаем валидацию всех форм
-enableValidation()
+enableValidation({
+  formSelector: '.profile-edit-form',
+  inputSelector: '.profile-edit-form__input',
+  submitButtonSelector: '.profile-edit-form__save-btn',
+  inactiveButtonClass: 'profile-edit-form__save-btn_state_disabled',
+  inputErrorClass: 'input-error-enable',
+  errorClass: 'description-error-enable'
+})
