@@ -1,6 +1,6 @@
 import initialCards from './data/initialCards.js'
 import { createCard, photoPopup } from './components/cards.js'
-import { showPopup, hidePopup, profileEditPopup } from "./components/modalWindows.js";
+import { showPopup, hidePopup, profileEditPopup, addCardPopup } from "./components/modalWindows.js";
 import enableValidation from "./components/forms-validation.js";
 import './pages/index.css'
 
@@ -11,7 +11,6 @@ const inputPlaceName = document.querySelector('.profile-edit-form__input_place_n
 const inputPlaceUrl = document.querySelector('.profile-edit-form__input_place_url')
 const profileEditBtn = document.querySelector('.profile__edit-btn')
 const addCardBtn = document.querySelector('.profile__add-btn')
-const addCardPopup = document.querySelector('.add-card-popup')
 const closeProfileBtn = document.querySelector('.close-profile')
 const closeAddBtn = document.querySelector('.close-add')
 const closePhotoBtn = document.querySelector('.close-photo')
@@ -43,13 +42,13 @@ closeAddBtn.addEventListener('click', () => hidePopup(addCardPopup))
 closePhotoBtn.addEventListener('click', () => hidePopup(photoPopup))
 
 // закрытие модальных окон клавишей Esc через делегирование событий
-document.body.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    hidePopup(profileEditPopup)
-    hidePopup(addCardPopup)
-    hidePopup(photoPopup)
-  }
-})
+// document.body.addEventListener('keydown', (e) => {
+//   if (e.key === 'Escape') {
+//     hidePopup(profileEditPopup)
+//     hidePopup(addCardPopup)
+//     hidePopup(photoPopup)
+//   }
+// })
 
 // включаем валидацию всех форм
 enableValidation({
