@@ -1,19 +1,26 @@
 import initialCards from './data/initialCards.js'
-import { createCard, photoPopup } from './components/cards.js'
-import { showPopup, hidePopup, profileEditPopup, addCardPopup } from "./components/modalWindows.js";
-import enableValidation from "./components/forms-validation.js";
+import { createCard } from './components/cards.js'
+import {enableValidation, toggleSubmitButton } from "./components/forms-validation.js";
+import {
+  showPopup,
+  hidePopup,
+  profileEditPopup,
+  addCardPopup,
+  profileName,
+  inputName,
+  profileJob,
+  inputJob } from "./components/modalWindows.js";
 import './pages/index.css'
 
 const gallery = document.querySelector('.gallery')
 const cardTemplate = document.getElementById('card').content
+const editForm = document.querySelector('.edit-form')
 const addCardForm = document.querySelector('.add-card-form')
 const inputPlaceName = document.querySelector('.profile-edit-form__input_place_name')
 const inputPlaceUrl = document.querySelector('.profile-edit-form__input_place_url')
 const profileEditBtn = document.querySelector('.profile__edit-btn')
 const addCardBtn = document.querySelector('.profile__add-btn')
-const closeProfileBtn = document.querySelector('.close-profile')
-const closeAddBtn = document.querySelector('.close-add')
-const closePhotoBtn = document.querySelector('.close-photo')
+const popups = document.querySelectorAll('.popup')
 
 // отрисовывем карточки из массива
 initialCards.forEach((card) => {
@@ -28,27 +35,40 @@ addCardForm.addEventListener('submit', (e) => {
   // очищаем форму
   e.target.reset()
 
+  toggleSubmitButton(addCardForm, {
+    inactiveButtonClass: 'profile-edit-form__save-btn_state_disabled',
+    submitButtonSelector: '.profile-edit-form__save-btn'
+  })
+
   // закрываем модальное окно с формой
   hidePopup(addCardPopup)
 })
 
-// открытие модальных окон
-profileEditBtn.addEventListener('click', () => showPopup(profileEditPopup))
+// открытие модального окна редактирования профиля
+profileEditBtn.addEventListener('click', () => {
+  // установка первоначальных значений в поля формы
+  inputName.value = profileName.textContent
+  inputJob.value = profileJob.textContent
+
+  toggleSubmitButton(editForm, {
+    inactiveButtonClass: 'profile-edit-form__save-btn_state_disabled',
+    submitButtonSelector: '.profile-edit-form__save-btn'
+  })
+
+  showPopup(profileEditPopup)
+})
+
+// открытие модального окна добавления карточки
 addCardBtn.addEventListener('click', () => showPopup(addCardPopup))
 
 // закрытие модальных окон
-closeProfileBtn.addEventListener('click', () => hidePopup(profileEditPopup))
-closeAddBtn.addEventListener('click', () => hidePopup(addCardPopup))
-closePhotoBtn.addEventListener('click', () => hidePopup(photoPopup))
-
-// закрытие модальных окон клавишей Esc через делегирование событий
-// document.body.addEventListener('keydown', (e) => {
-//   if (e.key === 'Escape') {
-//     hidePopup(profileEditPopup)
-//     hidePopup(addCardPopup)
-//     hidePopup(photoPopup)
-//   }
-// })
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (e) => {
+    if (popup.classList.contains('popup_opened') && e.target.classList.contains('popup__close-btn')) {
+      hidePopup(popup)
+    }
+  })
+})
 
 // включаем валидацию всех форм
 enableValidation({

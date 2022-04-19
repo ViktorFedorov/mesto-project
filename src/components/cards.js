@@ -50,9 +50,4 @@ function createCard(template, url, title) {
   return card
 }
 
-export {
-  photoPopup,
-  createCard
-}
-
-
+export { createCard }

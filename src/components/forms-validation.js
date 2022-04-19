@@ -53,11 +53,16 @@ function setEventListeners(formElement, settings) {
 }
 
 // включаем валидацию для всех форм и отключаем стандартное поведение
-export default function(settings) {
+function enableValidation(settings) {
   const formList = [...document.querySelectorAll(settings.formSelector)]
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (e) => e.preventDefault())
     setEventListeners(formElement, settings)
   })
+}
+
+export {
+  enableValidation,
+  toggleSubmitButton
 }
