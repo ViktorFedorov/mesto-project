@@ -1,6 +1,7 @@
 import initialCards from './data/initialCards.js'
 import { createCard } from './components/cards.js'
-import {enableValidation, toggleSubmitButton } from "./components/forms-validation.js";
+import { enableValidation, toggleSubmitButton } from "./components/forms-validation.js"
+import { getProfileData } from "./components/profile"
 import {
   showPopup,
   hidePopup,
@@ -9,7 +10,7 @@ import {
   profileName,
   inputName,
   profileJob,
-  inputJob } from "./components/modalWindows.js";
+  inputJob } from "./components/modalWindows.js"
 import './pages/index.css'
 
 const gallery = document.querySelector('.gallery')
@@ -69,6 +70,9 @@ popups.forEach((popup) => {
     }
   })
 })
+
+// загружаем инфо о профиле с сервера
+getProfileData()
 
 // включаем валидацию всех форм
 enableValidation({
