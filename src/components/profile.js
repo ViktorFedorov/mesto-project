@@ -1,5 +1,6 @@
 import { profileName, profileJob } from "./modalWindows"
 import { baseApiURL, authorizationToken } from "./constants"
+import { checkResponse } from "../utils/utils"
 
 // отображение информации о профиле пользователя в DOM
 function renderUserInfo({ name, about, avatar }) {
@@ -17,12 +18,7 @@ function getProfileData() {
       authorization: authorizationToken
     }
   })
-    .then(res => {
-      if (!res.ok) {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
-      return res.json()
-    })
+    .then(checkResponse)
     .then(renderUserInfo)
     .catch(err => console.log(err))
 }

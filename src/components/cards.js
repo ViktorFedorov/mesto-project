@@ -1,5 +1,6 @@
 import { showPopup } from "./modalWindows.js"
 import { baseApiURL, authorizationToken } from "./constants"
+import { checkResponse } from "../utils/utils"
 
 const photoPopup = document.querySelector('.photo-popup')
 const photoPopupImage = photoPopup.querySelector('.popup__photo')
@@ -38,12 +39,7 @@ function getCards() {
       authorization: authorizationToken
     }
   })
-    .then(res => {
-      if (!res.ok) {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
-      return res.json()
-    })
+    .then(checkResponse)
     .then(renderCards)
     .catch((err => console.log(err)))
 }
