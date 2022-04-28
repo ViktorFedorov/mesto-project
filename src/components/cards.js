@@ -1,8 +1,52 @@
-import { showPopup } from "./modalWindows.js";
+import { showPopup } from "./modalWindows.js"
+import { baseApiURL, authorizationToken } from "./constants"
 
 const photoPopup = document.querySelector('.photo-popup')
 const photoPopupImage = photoPopup.querySelector('.popup__photo')
 const photoPopupLabel = photoPopup.querySelector('.popup__label')
+const gallery = document.querySelector('.gallery')
+const cardTemplate = document.getElementById('card').content
+
+// создание карточки
+function createCard(template, url, title) {
+  // клонируем и заполняем элемент карточки
+  const card = template.querySelector('.card').cloneNode(true)
+  const cardImage = card.querySelector('.card__image')
+  cardImage.src = url
+  cardImage.alt = title
+  card.querySelector('.card__title').textContent = title
+
+  // подвешиваем обработчики событий
+  handleClickLike(card.querySelector('.card__like-btn'))
+  handleDeleteCard(card.querySelector('.card__trash-icon'))
+  handleOpenImage(cardImage, title)
+  return card
+}
+
+// отрисовка карточек пришедших с сервера
+function renderCards(cards) {
+  cards.forEach(card => {
+    gallery.prepend(createCard(cardTemplate, card.link, card.name))
+  })
+}
+
+// загрузка карточек с сервера
+function getCards() {
+  fetch(`${baseApiURL}/cards`, {
+    method: 'GET',
+    headers: {
+      authorization: authorizationToken
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`)
+      }
+      return res.json()
+    })
+    .then(renderCards)
+    .catch((err => console.log(err)))
+}
 
 // логика работы кнопки "лайк"
 function handleClickLike(elem) {
@@ -34,20 +78,9 @@ function handleOpenImage(elem, alt) {
   })
 }
 
-// создание карточки
-function createCard(template, url, title) {
-  // клонируем и заполняем элемент карточки
-  const card = template.querySelector('.card').cloneNode(true)
-  const cardImage = card.querySelector('.card__image')
-  cardImage.src = url
-  cardImage.alt = title
-  card.querySelector('.card__title').textContent = title
-
-  // подвешиваем обработчики событий
-  handleClickLike(card.querySelector('.card__like-btn'))
-  handleDeleteCard(card.querySelector('.card__trash-icon'))
-  handleOpenImage(cardImage, title)
-  return card
+export {
+  createCard,
+  getCards,
+  gallery,
+  cardTemplate
 }
-
-export { createCard }

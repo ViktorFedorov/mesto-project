@@ -1,5 +1,5 @@
 import { profileName, profileJob } from "./modalWindows"
-import { baseApiURL, authorizationToken } from "./constants";
+import { baseApiURL, authorizationToken } from "./constants"
 
 // отображение информации о профиле пользователя в DOM
 function renderUserInfo({ name, about, avatar }) {
