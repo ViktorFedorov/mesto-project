@@ -1,4 +1,5 @@
 import { profileName, profileJob } from "./modalWindows"
+import { baseApiURL, authorizationToken } from "./constants";
 
 // отображение информации о профиле пользователя в DOM
 function renderUserInfo({ name, about, avatar }) {
@@ -10,10 +11,10 @@ function renderUserInfo({ name, about, avatar }) {
 
 // получение информации о пользователе
 function getProfileData() {
-  fetch('https://mesto.nomoreparties.co/v1/plus-cohort-9/users/me', {
+  fetch(`${baseApiURL}/users/me`, {
     method: 'GET',
     headers: {
-      authorization: 'cfb5467c-bf03-4f53-98d0-54d36791533e'
+      authorization: authorizationToken
     }
   })
     .then(res => {
