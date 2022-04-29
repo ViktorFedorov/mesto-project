@@ -9,13 +9,14 @@ const gallery = document.querySelector('.gallery')
 const cardTemplate = document.getElementById('card').content
 
 // создание карточки
-function createCard(template, url, title) {
+function createCard(template, url, title, likesCount = 0) {
   // клонируем и заполняем элемент карточки
   const card = template.querySelector('.card').cloneNode(true)
   const cardImage = card.querySelector('.card__image')
   cardImage.src = url
   cardImage.alt = title
   card.querySelector('.card__title').textContent = title
+  card.querySelector('.card__likes-count').textContent = likesCount.toString()
 
   // подвешиваем обработчики событий
   handleClickLike(card.querySelector('.card__like-btn'))
@@ -27,8 +28,8 @@ function createCard(template, url, title) {
 // отрисовка карточек пришедших с сервера
 function renderCards(data) {
   if (Array.isArray(data)) {
-    data.forEach(({ link, name }) => {
-      gallery.prepend(createCard(cardTemplate, link, name))
+    data.reverse().forEach(({ link, name, likes }) => {
+      gallery.prepend(createCard(cardTemplate, link, name, likes.length))
     })
   } else {
     gallery.prepend(createCard(cardTemplate, data.link, data.name))
@@ -42,6 +43,10 @@ function getCards() {
     headers: { authorization: authorizationToken }
   })
     .then(checkResponse)
+    .then(data => {
+      console.log(data)
+      return data
+    })
     .then(renderCards)
     .catch((err => console.log(err)))
 }
