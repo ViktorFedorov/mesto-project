@@ -1,4 +1,4 @@
-import { createCard, getCards, gallery, cardTemplate } from './components/cards.js'
+import { createCard, getCards, addCard, gallery, cardTemplate } from './components/cards.js'
 import { enableValidation, toggleSubmitButton } from "./components/forms-validation.js"
 import { getProfileData } from "./components/profile"
 import {
@@ -23,7 +23,8 @@ const popups = document.querySelectorAll('.popup')
 // добавление карточки при отправке формы
 addCardForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  gallery.prepend(createCard(cardTemplate, inputPlaceUrl.value, inputPlaceName.value))
+
+  addCard(inputPlaceName.value, inputPlaceUrl.value)
 
   // очищаем форму
   e.target.reset()

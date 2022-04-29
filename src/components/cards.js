@@ -25,10 +25,14 @@ function createCard(template, url, title) {
 }
 
 // отрисовка карточек пришедших с сервера
-function renderCards(cards) {
-  cards.forEach(({ link, name }) => {
-    gallery.prepend(createCard(cardTemplate, link, name))
-  })
+function renderCards(data) {
+  if (Array.isArray(data)) {
+    data.forEach(({ link, name }) => {
+      gallery.prepend(createCard(cardTemplate, link, name))
+    })
+  } else {
+    gallery.prepend(createCard(cardTemplate, data.link, data.name))
+  }
 }
 
 // загрузка карточек с сервера
@@ -36,6 +40,24 @@ function getCards() {
   fetch(`${baseApiURL}/cards`, {
     method: 'GET',
     headers: { authorization: authorizationToken }
+  })
+    .then(checkResponse)
+    .then(renderCards)
+    .catch((err => console.log(err)))
+}
+
+// добавление карточки на сервер
+function addCard(name, link) {
+  fetch(`${baseApiURL}/cards`, {
+    method: 'POST',
+    headers: {
+      authorization: authorizationToken,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name,
+      link
+    })
   })
     .then(checkResponse)
     .then(renderCards)
@@ -75,6 +97,7 @@ function handleOpenImage(elem, alt) {
 export {
   createCard,
   getCards,
+  addCard,
   gallery,
   cardTemplate
 }
