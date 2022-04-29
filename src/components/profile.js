@@ -14,9 +14,25 @@ function renderUserInfo({ name, about, avatar }) {
 function getProfileData() {
   fetch(`${baseApiURL}/users/me`, {
     method: 'GET',
+    headers: { authorization: authorizationToken }
+  })
+    .then(checkResponse)
+    .then(renderUserInfo)
+    .catch(err => console.log(err))
+}
+
+// обновление информации о пользователе
+function updateProfileData(name, about) {
+  fetch(`${baseApiURL}/users/me`, {
+    method: 'PATCH',
     headers: {
+      'Content-Type': 'application/json',
       authorization: authorizationToken
-    }
+    },
+    body: JSON.stringify({
+      name,
+      about
+    })
   })
     .then(checkResponse)
     .then(renderUserInfo)
@@ -24,5 +40,6 @@ function getProfileData() {
 }
 
 export {
-  getProfileData
+  getProfileData,
+  updateProfileData
 }

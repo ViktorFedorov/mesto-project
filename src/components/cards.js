@@ -26,8 +26,8 @@ function createCard(template, url, title) {
 
 // отрисовка карточек пришедших с сервера
 function renderCards(cards) {
-  cards.forEach(card => {
-    gallery.prepend(createCard(cardTemplate, card.link, card.name))
+  cards.forEach(({ link, name }) => {
+    gallery.prepend(createCard(cardTemplate, link, name))
   })
 }
 
@@ -35,9 +35,7 @@ function renderCards(cards) {
 function getCards() {
   fetch(`${baseApiURL}/cards`, {
     method: 'GET',
-    headers: {
-      authorization: authorizationToken
-    }
+    headers: { authorization: authorizationToken }
   })
     .then(checkResponse)
     .then(renderCards)
