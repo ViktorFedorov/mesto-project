@@ -1,6 +1,6 @@
-import initialCards from './data/initialCards.js'
-import { createCard } from './components/cards.js'
-import {enableValidation, toggleSubmitButton } from "./components/forms-validation.js";
+import { createCard, getCards, addCard, gallery, cardTemplate } from './components/cards.js'
+import { enableValidation, toggleSubmitButton } from "./components/forms-validation.js"
+import { getProfileData } from "./components/profile"
 import {
   showPopup,
   hidePopup,
@@ -9,11 +9,9 @@ import {
   profileName,
   inputName,
   profileJob,
-  inputJob } from "./components/modalWindows.js";
+  inputJob } from "./components/modalWindows.js"
 import './pages/index.css'
 
-const gallery = document.querySelector('.gallery')
-const cardTemplate = document.getElementById('card').content
 const editForm = document.querySelector('.edit-form')
 const addCardForm = document.querySelector('.add-card-form')
 const inputPlaceName = document.querySelector('.profile-edit-form__input_place_name')
@@ -22,15 +20,11 @@ const profileEditBtn = document.querySelector('.profile__edit-btn')
 const addCardBtn = document.querySelector('.profile__add-btn')
 const popups = document.querySelectorAll('.popup')
 
-// отрисовывем карточки из массива
-initialCards.forEach((card) => {
-  gallery.prepend(createCard(cardTemplate, card.link, card.name))
-})
-
 // добавление карточки при отправке формы
 addCardForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  gallery.prepend(createCard(cardTemplate, inputPlaceUrl.value, inputPlaceName.value))
+
+  addCard(inputPlaceName.value, inputPlaceUrl.value)
 
   // очищаем форму
   e.target.reset()
@@ -69,6 +63,12 @@ popups.forEach((popup) => {
     }
   })
 })
+
+// загружаем инфо о профиле с сервера
+getProfileData()
+
+// загрузка карточек
+getCards()
 
 // включаем валидацию всех форм
 enableValidation({
