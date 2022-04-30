@@ -1,22 +1,19 @@
-import { setUserId, renderUserInfo } from "./profile"
-import { renderCards } from "./cards"
-import { authorizationToken, baseApiURL } from "./constants"
 import { checkResponse } from "../utils/utils"
+
+const baseApiURL = 'https://mesto.nomoreparties.co/v1/plus-cohort-9'
+const authorizationToken = 'cfb5467c-bf03-4f53-98d0-54d36791533e'
 
 // получение информации о пользователе
 function getProfileData() {
-  fetch(`${baseApiURL}/users/me`, {
+  return fetch(`${baseApiURL}/users/me`, {
     headers: { authorization: authorizationToken }
   })
     .then(checkResponse)
-    .then(setUserId)
-    .then(renderUserInfo)
-    .catch(err => console.log(err))
 }
 
 // обновление информации о пользователе
 function updateProfileData(name, about) {
-  fetch(`${baseApiURL}/users/me`, {
+  return fetch(`${baseApiURL}/users/me`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -27,28 +24,19 @@ function updateProfileData(name, about) {
       about
     })
   })
-    .then(checkResponse)
-    .then(renderUserInfo)
-    .catch(err => console.log(err))
 }
 
 // загрузка карточек с сервера
 function getCards() {
-  fetch(`${baseApiURL}/cards`, {
+  return fetch(`${baseApiURL}/cards`, {
     headers: { authorization: authorizationToken }
   })
     .then(checkResponse)
-    .then(data => {
-      console.log(data)
-      return data
-    })
-    .then(renderCards)
-    .catch((err => console.log(err)))
 }
 
 // добавление карточки на сервер
 function addCard(name, link) {
-  fetch(`${baseApiURL}/cards`, {
+  return fetch(`${baseApiURL}/cards`, {
     method: 'POST',
     headers: {
       authorization: authorizationToken,
@@ -60,8 +48,6 @@ function addCard(name, link) {
     })
   })
     .then(checkResponse)
-    .then(renderCards)
-    .catch((err => console.log(err)))
 }
 
 export {

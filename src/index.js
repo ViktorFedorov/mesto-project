@@ -1,17 +1,18 @@
 import { getCards, addCard } from './components/api'
 import { enableValidation, toggleSubmitButton } from "./components/forms-validation"
 import { getProfileData } from "./components/api"
+import { renderUserInfo, setUserId } from "./components/profile"
+import { renderCards } from "./components/cards"
+import { profileName, profileJob } from "./components/profile"
 import {
   showPopup,
   hidePopup,
   profileEditPopup,
-  addCardPopup,
-  profileName,
   inputName,
-  profileJob,
   inputJob } from "./components/modalWindows"
 import './pages/index.css'
 
+const addCardPopup = document.querySelector('.add-card-popup')
 const editForm = document.querySelector('.edit-form')
 const addCardForm = document.querySelector('.add-card-form')
 const inputPlaceName = document.querySelector('.profile-edit-form__input_place_name')
@@ -25,6 +26,8 @@ addCardForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
   addCard(inputPlaceName.value, inputPlaceUrl.value)
+    .then(renderCards)
+    .catch((err => console.log(err)))
 
   // очищаем форму
   e.target.reset()
@@ -66,9 +69,14 @@ popups.forEach((popup) => {
 
 // загружаем инфо о профиле с сервера
 getProfileData()
+  .then(setUserId)
+  .then(renderUserInfo)
+  .catch(err => console.log(err))
 
-// загрузка карточек
+// загружаем карточки
 getCards()
+  .then(renderCards)
+  .catch((err => console.log(err)))
 
 // включаем валидацию всех форм
 enableValidation({

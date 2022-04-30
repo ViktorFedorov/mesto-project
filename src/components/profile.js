@@ -1,4 +1,5 @@
-import { profileName, profileJob } from "./modalWindows"
+const profileName = document.querySelector('.profile__name')
+const profileJob = document.querySelector('.profile__description')
 
 let userId = ''
 
@@ -19,5 +20,7 @@ function renderUserInfo({ name, about, avatar }) {
 export {
   setUserId,
   renderUserInfo,
-  userId
+  userId,
+  profileName,
+  profileJob
 }

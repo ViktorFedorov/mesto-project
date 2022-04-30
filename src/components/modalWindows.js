@@ -1,11 +1,10 @@
-import { updateProfileData } from "./api";
+import { updateProfileData } from "./api"
+import { checkResponse } from "../utils/utils"
+import { renderUserInfo } from "./profile"
 
 const inputName = document.querySelector('.profile-edit-form__input_value_name')
 const inputJob = document.querySelector('.profile-edit-form__input_value_description')
-const profileName = document.querySelector('.profile__name')
-const profileJob = document.querySelector('.profile__description')
 const profileEditForm = document.querySelector('.edit-form')
-const addCardPopup = document.querySelector('.add-card-popup')
 const profileEditPopup = document.querySelector('.profile-edit-popup')
 
 // закрытие модальных окон клавишей Esc
@@ -40,7 +39,12 @@ function hidePopup(popup) {
 // сохранение информации в профиле
 profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
+
   updateProfileData(inputName.value, inputJob.value)
+    .then(checkResponse)
+    .then(renderUserInfo)
+    .catch(err => console.log(err))
+
   hidePopup(profileEditPopup)
 })
 
@@ -48,9 +52,6 @@ export {
   showPopup,
   hidePopup,
   profileEditPopup,
-  addCardPopup,
-  profileName,
   inputName,
-  profileJob,
   inputJob
 }
