@@ -50,9 +50,18 @@ function addCard(name, link) {
     .then(checkResponse)
 }
 
+// удаление карточки
+function deleteCard(id) {
+  return fetch(`${baseApiURL}/cards/${id}`, {
+    method: 'DELETE',
+    headers: { authorization: authorizationToken }
+  })
+}
+
 export {
   getProfileData,
   updateProfileData,
   getCards,
-  addCard
+  addCard,
+  deleteCard
 }

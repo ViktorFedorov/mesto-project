@@ -1,7 +1,9 @@
-import { showPopup } from "./modalWindows"
+import {hidePopup, showPopup} from "./modalWindows"
 import { userId } from "./profile"
+import { deleteCard } from "./api"
 
 const photoPopup = document.querySelector('.photo-popup')
+const confirmDeletePopup = document.querySelector('.confirm-delete-popup')
 const photoPopupImage = photoPopup.querySelector('.popup__photo')
 const photoPopupLabel = photoPopup.querySelector('.popup__label')
 const gallery = document.querySelector('.gallery')
@@ -13,7 +15,7 @@ function checkOwner(ownerId) {
 }
 
 // создание карточки
-function createCard(template, url, title, ownerId, likesCount = 0) {
+function createCard(template, url, title, ownerId, cardId, likesCount = 0) {
   // клонируем и заполняем элемент карточки
   const card = template.querySelector('.card').cloneNode(true)
   const cardImage = card.querySelector('.card__image')
@@ -29,9 +31,12 @@ function createCard(template, url, title, ownerId, likesCount = 0) {
   card.querySelector('.card__title').textContent = title
   card.querySelector('.card__likes-count').textContent = likesCount.toString()
 
+  // записываем айди каждой карточки в дата-атрибут кнопки удалить, для последующей передачи его на сервер для удаления
+  trashIcon.setAttribute('data-id', cardId)
+
   // подвешиваем обработчики событий
   handleClickLike(card.querySelector('.card__like-btn'))
-  handleDeleteCard(card.querySelector('.card__trash-icon'))
+  handleDeleteCard(trashIcon)
   handleOpenImage(cardImage, title)
   return card
 }
@@ -40,10 +45,10 @@ function createCard(template, url, title, ownerId, likesCount = 0) {
 function renderCards(data) {
   if (Array.isArray(data)) {
     data.reverse().forEach((card) => {
-      gallery.prepend(createCard(cardTemplate, card.link, card.name, card.owner._id, card.likes.length))
+      gallery.prepend(createCard(cardTemplate, card.link, card.name, card.owner._id, card._id, card.likes.length))
     })
   } else {
-    gallery.prepend(createCard(cardTemplate, data.link, data.name, data.owner._id))
+    gallery.prepend(createCard(cardTemplate, data.link, data.name, data.owner._id, data._id))
   }
 }
 
@@ -54,16 +59,22 @@ function handleClickLike(elem) {
   })
 }
 
-// логика работы кнопки "удалить"
+// подтверждение удаления карточки
+function confirmDelete(elem) {
+  showPopup(confirmDeletePopup)
+
+  confirmDeletePopup.addEventListener('submit', (e) => {
+    e.preventDefault()
+    deleteCard(elem.getAttribute('data-id'))
+    elem.closest('.card').remove()
+    hidePopup(confirmDeletePopup)
+  })
+}
+
+// логика работы кнопки "удалить" - открывает модальное окно для подтверждения
 function handleDeleteCard(elem) {
   elem.addEventListener('click', (e) => {
-    // добавляем класс анимирующий исчезновение
-    e.target.closest('.card').classList.add('smooth-disappearance')
-
-    // после окончания анимации удаляем элемент из DOM
-    e.target.addEventListener('transitionend', (e) => {
-      e.target.closest('.card').remove()
-    })
+    confirmDelete(e.target)
   })
 }
 
