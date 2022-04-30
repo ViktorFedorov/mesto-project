@@ -1,6 +1,6 @@
-import { getCards, addCard } from './components/cards.js'
-import { enableValidation, toggleSubmitButton } from "./components/forms-validation.js"
-import { getProfileData } from "./components/profile"
+import { getCards, addCard } from './components/api'
+import { enableValidation, toggleSubmitButton } from "./components/forms-validation"
+import { getProfileData } from "./components/api"
 import {
   showPopup,
   hidePopup,
@@ -9,7 +9,7 @@ import {
   profileName,
   inputName,
   profileJob,
-  inputJob } from "./components/modalWindows.js"
+  inputJob } from "./components/modalWindows"
 import './pages/index.css'
 
 const editForm = document.querySelector('.edit-form')

@@ -1,4 +1,4 @@
-import { updateProfileData } from './profile'
+import { updateProfileData } from "./api";
 
 const inputName = document.querySelector('.profile-edit-form__input_value_name')
 const inputJob = document.querySelector('.profile-edit-form__input_value_description')
@@ -40,10 +40,7 @@ function hidePopup(popup) {
 // сохранение информации в профиле
 profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
-
   updateProfileData(inputName.value, inputJob.value)
-  // profileName.textContent = inputName.value
-  // profileJob.textContent = inputJob.value
   hidePopup(profileEditPopup)
 })
 

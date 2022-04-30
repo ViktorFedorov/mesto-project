@@ -1,6 +1,4 @@
-import { showPopup } from "./modalWindows.js"
-import { baseApiURL, authorizationToken } from "./constants"
-import { checkResponse } from "../utils/utils"
+import { showPopup } from "./modalWindows"
 import { userId } from "./profile"
 
 const photoPopup = document.querySelector('.photo-popup')
@@ -49,38 +47,6 @@ function renderCards(data) {
   }
 }
 
-// загрузка карточек с сервера
-function getCards() {
-  fetch(`${baseApiURL}/cards`, {
-    headers: { authorization: authorizationToken }
-  })
-    .then(checkResponse)
-    .then(data => {
-      console.log(data)
-      return data
-    })
-    .then(renderCards)
-    .catch((err => console.log(err)))
-}
-
-// добавление карточки на сервер
-function addCard(name, link) {
-  fetch(`${baseApiURL}/cards`, {
-    method: 'POST',
-    headers: {
-      authorization: authorizationToken,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name,
-      link
-    })
-  })
-    .then(checkResponse)
-    .then(renderCards)
-    .catch((err => console.log(err)))
-}
-
 // логика работы кнопки "лайк"
 function handleClickLike(elem) {
   elem.addEventListener('click', (e) => {
@@ -113,8 +79,7 @@ function handleOpenImage(elem, alt) {
 
 export {
   createCard,
-  getCards,
-  addCard,
+  renderCards,
   gallery,
   cardTemplate
 }
