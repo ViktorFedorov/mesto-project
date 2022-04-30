@@ -31,11 +31,11 @@ function createCard(template, url, title, ownerId, cardId, likesCount = 0) {
   card.querySelector('.card__title').textContent = title
   card.querySelector('.card__likes-count').textContent = likesCount.toString()
 
-  // записываем айди каждой карточки в дата-атрибут кнопки удалить, для последующей передачи его на сервер для удаления
+  // записываем id каждой карточки в дата-атрибут кнопки 'удалить', для последующей передачи его на сервер для удаления
   trashIcon.setAttribute('data-id', cardId)
 
   // подвешиваем обработчики событий
-  handleClickLike(card.querySelector('.card__like-btn'))
+  handleClickLike(card.querySelector('.card__like-btn'), cardId)
   handleDeleteCard(trashIcon)
   handleOpenImage(cardImage, title)
   return card
@@ -53,9 +53,10 @@ function renderCards(data) {
 }
 
 // логика работы кнопки "лайк"
-function handleClickLike(elem) {
+function handleClickLike(elem, id) {
   elem.addEventListener('click', (e) => {
     e.target.classList.toggle('card__like-btn_active')
+    console.log(id)            /////////////////////////////////////////////////////////////////////////////////////
   })
 }
 

@@ -52,10 +52,11 @@ function addCard(name, link) {
 
 // удаление карточки
 function deleteCard(id) {
-  return fetch(`${baseApiURL}/cards/${id}`, {
+  fetch(`${baseApiURL}/cards/${id}`, {
     method: 'DELETE',
     headers: { authorization: authorizationToken }
   })
+    .catch(console.log)
 }
 
 export {
