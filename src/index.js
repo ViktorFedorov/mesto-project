@@ -1,4 +1,4 @@
-import { createCard, getCards, addCard, gallery, cardTemplate } from './components/cards.js'
+import { getCards, addCard } from './components/cards.js'
 import { enableValidation, toggleSubmitButton } from "./components/forms-validation.js"
 import { getProfileData } from "./components/profile"
 import {

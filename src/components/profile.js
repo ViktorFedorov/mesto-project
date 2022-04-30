@@ -2,6 +2,8 @@ import { profileName, profileJob } from "./modalWindows"
 import { baseApiURL, authorizationToken } from "./constants"
 import { checkResponse } from "../utils/utils"
 
+let userId = ''
+
 // отображение информации о профиле пользователя в DOM
 function renderUserInfo({ name, about, avatar }) {
   const profileImage = document.querySelector('.profile__image')
@@ -10,13 +12,19 @@ function renderUserInfo({ name, about, avatar }) {
   profileJob.textContent = about
 }
 
+// сохранение id пользователя в переменную
+function setUserId(data) {
+  userId = data._id
+  return data
+}
+
 // получение информации о пользователе
 function getProfileData() {
   fetch(`${baseApiURL}/users/me`, {
-    method: 'GET',
     headers: { authorization: authorizationToken }
   })
     .then(checkResponse)
+    .then(setUserId)
     .then(renderUserInfo)
     .catch(err => console.log(err))
 }
@@ -41,5 +49,6 @@ function updateProfileData(name, about) {
 
 export {
   getProfileData,
-  updateProfileData
+  updateProfileData,
+  userId
 }

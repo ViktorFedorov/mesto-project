@@ -1,6 +1,7 @@
 import { showPopup } from "./modalWindows.js"
 import { baseApiURL, authorizationToken } from "./constants"
 import { checkResponse } from "../utils/utils"
+import { userId } from "./profile"
 
 const photoPopup = document.querySelector('.photo-popup')
 const photoPopupImage = photoPopup.querySelector('.popup__photo')
@@ -8,11 +9,23 @@ const photoPopupLabel = photoPopup.querySelector('.popup__label')
 const gallery = document.querySelector('.gallery')
 const cardTemplate = document.getElementById('card').content
 
+// проверяет является ли пользователь владельцем карточки
+function checkOwner(ownerId) {
+  return userId === ownerId
+}
+
 // создание карточки
-function createCard(template, url, title, likesCount = 0) {
+function createCard(template, url, title, ownerId, likesCount = 0) {
   // клонируем и заполняем элемент карточки
   const card = template.querySelector('.card').cloneNode(true)
   const cardImage = card.querySelector('.card__image')
+  const trashIcon = card.querySelector('.card__trash-icon')
+
+  // скрываем кнопку удаления у чужих карточек
+  if (!checkOwner(ownerId)) {
+    trashIcon.style.display = 'none'
+  }
+
   cardImage.src = url
   cardImage.alt = title
   card.querySelector('.card__title').textContent = title
@@ -28,18 +41,17 @@ function createCard(template, url, title, likesCount = 0) {
 // отрисовка карточек пришедших с сервера
 function renderCards(data) {
   if (Array.isArray(data)) {
-    data.reverse().forEach(({ link, name, likes }) => {
-      gallery.prepend(createCard(cardTemplate, link, name, likes.length))
+    data.reverse().forEach((card) => {
+      gallery.prepend(createCard(cardTemplate, card.link, card.name, card.owner._id, card.likes.length))
     })
   } else {
-    gallery.prepend(createCard(cardTemplate, data.link, data.name))
+    gallery.prepend(createCard(cardTemplate, data.link, data.name, data.owner._id))
   }
 }
 
 // загрузка карточек с сервера
 function getCards() {
   fetch(`${baseApiURL}/cards`, {
-    method: 'GET',
     headers: { authorization: authorizationToken }
   })
     .then(checkResponse)
