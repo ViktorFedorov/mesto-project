@@ -14,41 +14,52 @@ function checkOwner(ownerId) {
   return userId === ownerId
 }
 
+// проверяет есть ли наши лайки на карточке
+function checkOwnLikes(cardsArray) {
+  return cardsArray.some(el => el._id === userId)
+}
+
 // создание карточки
-function createCard(template, url, title, ownerId, cardId, likesCount = 0) {
+function createCard(template, card) {
   // клонируем и заполняем элемент карточки
-  const card = template.querySelector('.card').cloneNode(true)
-  const cardImage = card.querySelector('.card__image')
-  const trashIcon = card.querySelector('.card__trash-icon')
+  const cardElem = template.querySelector('.card').cloneNode(true)
+  const cardImage = cardElem.querySelector('.card__image')
+  const trashIcon = cardElem.querySelector('.card__trash-icon')
+  const likeButton = cardElem.querySelector('.card__like-btn')
+
+  // подсвечиваем лайкнутые нами карточки
+  if (checkOwnLikes(card.likes)) {
+    likeButton.classList.add('card__like-btn_active')
+  }
 
   // скрываем кнопку удаления у чужих карточек
-  if (!checkOwner(ownerId)) {
+  if (!checkOwner(card.owner._id)) {
     trashIcon.style.display = 'none'
   }
 
-  cardImage.src = url
-  cardImage.alt = title
-  card.querySelector('.card__title').textContent = title
-  card.querySelector('.card__likes-count').textContent = likesCount.toString()
+  cardImage.src = card.link
+  cardImage.alt = card.name
+  cardElem.querySelector('.card__title').textContent = card.name
+  cardElem.querySelector('.card__likes-count').textContent = card.likes.length.toString()
 
   // записываем id каждой карточки в дата-атрибут кнопки 'удалить', для последующей передачи его на сервер для удаления
-  trashIcon.setAttribute('data-id', cardId)
+  trashIcon.setAttribute('data-id', card._id)
 
   // подвешиваем обработчики событий
-  handleClickLike(card.querySelector('.card__like-btn'), cardId)
+  handleClickLike(cardElem.querySelector('.card__like-btn'), card._id)
   handleDeleteCard(trashIcon)
-  handleOpenImage(cardImage, title)
-  return card
+  handleOpenImage(cardImage, card.name)
+  return cardElem
 }
 
 // рендер карточек пришедших с сервера
 function renderCards(data) {
   if (Array.isArray(data)) {
-    data.reverse().forEach((card) => {
-      gallery.prepend(createCard(cardTemplate, card.link, card.name, card.owner._id, card._id, card.likes.length))
+    data.reverse().forEach(card => {
+      gallery.prepend(createCard(cardTemplate, card))
     })
   } else {
-    gallery.prepend(createCard(cardTemplate, data.link, data.name, data.owner._id, data._id))
+    gallery.prepend(createCard(cardTemplate, data))
   }
 }
 
