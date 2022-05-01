@@ -41,7 +41,7 @@ function createCard(template, url, title, ownerId, cardId, likesCount = 0) {
   return card
 }
 
-// отрисовка карточек пришедших с сервера
+// рендер карточек пришедших с сервера
 function renderCards(data) {
   if (Array.isArray(data)) {
     data.reverse().forEach((card) => {
