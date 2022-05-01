@@ -15,8 +15,8 @@ function checkOwner(ownerId) {
 }
 
 // проверяет есть ли наши лайки на карточке
-function checkOwnLikes(cardsArray) {
-  return cardsArray.some(el => el._id === userId)
+function checkOwnLikes(likesArray) {
+  return likesArray.some(el => el._id === userId)
 }
 
 // создание карточки
