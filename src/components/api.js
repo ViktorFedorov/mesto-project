@@ -59,10 +59,20 @@ function deleteCard(id) {
     .catch(console.log)
 }
 
+// добавление лайка карточке
+function addLikeToCard(id) {
+  return fetch(`${baseApiURL}/cards/likes/${id}`, {
+    method: 'PUT',
+    headers: { authorization: authorizationToken }
+  })
+    .then(checkResponse)
+}
+
 export {
   getProfileData,
   updateProfileData,
   getCards,
   addCard,
-  deleteCard
+  deleteCard,
+  addLikeToCard
 }

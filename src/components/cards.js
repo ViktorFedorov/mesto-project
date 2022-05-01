@@ -1,6 +1,6 @@
-import {hidePopup, showPopup} from "./modalWindows"
+import { hidePopup, showPopup } from "./modalWindows"
+import { addLikeToCard, deleteCard } from "./api"
 import { userId } from "./profile"
-import { deleteCard } from "./api"
 
 const photoPopup = document.querySelector('.photo-popup')
 const confirmDeletePopup = document.querySelector('.confirm-delete-popup')
@@ -52,11 +52,22 @@ function renderCards(data) {
   }
 }
 
+// рендер обновленного количества лайков
+function setLike(elem, likesCount) {
+  const likes = elem.nextElementSibling
+  likes.textContent = likesCount
+}
+
 // логика работы кнопки "лайк"
 function handleClickLike(elem, id) {
   elem.addEventListener('click', (e) => {
+    addLikeToCard(id)
+      .then(data => {
+        setLike(elem, data.likes.length)
+      })
+      .catch(err => console.log(err))
+
     e.target.classList.toggle('card__like-btn_active')
-    console.log(id)            /////////////////////////////////////////////////////////////////////////////////////
   })
 }
 
