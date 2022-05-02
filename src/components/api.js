@@ -46,7 +46,7 @@ function addCard(name, link) {
 
 // удаление карточки
 function deleteCard(id) {
-  fetch(`${config.baseApiURL}/cards/${id}`, {
+  return fetch(`${config.baseApiURL}/cards/${id}`, {
     method: 'DELETE',
     headers: config.headers
   })

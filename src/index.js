@@ -1,9 +1,7 @@
-import { getCards, addCard, updateAvatar, updateProfileData } from './components/api'
+import { getCards, addCard, updateAvatar, updateProfileData, getProfileData } from './components/api'
 import { enableValidation, toggleSubmitButton } from "./components/forms-validation"
-import { getProfileData } from "./components/api"
-import { renderUserInfo, setUserId } from "./components/profile"
+import { renderUserInfo, setUserId, profileName, profileJob } from "./components/profile"
 import { renderCards } from "./components/cards"
-import { profileName, profileJob } from "./components/profile"
 import { showPopup, hidePopup } from "./components/modalWindows"
 import './pages/index.css'
 
