@@ -3,7 +3,7 @@ import { checkResponse } from "../utils/utils"
 const config = {
   baseApiURL: 'https://mesto.nomoreparties.co/v1/plus-cohort-9',
   headers: {
-    authorizationToken: 'cfb5467c-bf03-4f53-98d0-54d36791533e',
+    authorization: 'cfb5467c-bf03-4f53-98d0-54d36791533e',
     'Content-Type': 'application/json',
   }
 }
