@@ -17,7 +17,10 @@
 
     <main class="main">
       <section class="profile">
-        <img class="profile__image" src="" alt="аватар пользователя">
+        <div class="profile__image-container">
+          <img class="profile__image" src="" alt="аватар пользователя">
+          <button class="profile__image-edit-btn" aria-label="Редактировать аватар"></button>
+        </div>
         <div class="profile__info">
           <h1 class="profile__name"></h1>
           <button class="profile__edit-btn hover-effect" type="button" aria-label="Редактировать профиль"></button>
@@ -47,6 +50,19 @@
         <input class="profile-edit-form__input profile-edit-form__input_value_description" type="text"
                name="description" id="description-input" minlength="2" maxlength="200" required>
         <span class="description-input-error"></span>
+        <button class="profile-edit-form__save-btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup avatar-edit-popup">
+    <div class="popup__container">
+      <button class="popup__close-btn hover-effect close-add" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form action="#" class="profile-edit-form avatar-edit-form" name="add-card" novalidate>
+        <input class="profile-edit-form__input profile-edit-form__input_avatar_url"
+               placeholder="Ссылка на картинку" id="avatar-url-input" type="url" name="url" required>
+        <span class="avatar-url-input-error"></span>
         <button class="profile-edit-form__save-btn" type="submit">Сохранить</button>
       </form>
     </div>

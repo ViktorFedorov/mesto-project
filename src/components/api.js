@@ -77,6 +77,19 @@ function removeLikeToCard(id) {
     .then(checkResponse)
 }
 
+// редактирование аватара
+function updateAvatar(avatar) {
+  return fetch(`${baseApiURL}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: {
+      authorization: authorizationToken,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ avatar })
+  })
+    .then(checkResponse)
+}
+
 export {
   getProfileData,
   updateProfileData,
@@ -84,5 +97,6 @@ export {
   addCard,
   deleteCard,
   addLikeToCard,
-  removeLikeToCard
+  removeLikeToCard,
+  updateAvatar
 }

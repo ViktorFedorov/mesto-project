@@ -1,12 +1,3 @@
-import { updateProfileData } from "./api"
-import { checkResponse } from "../utils/utils"
-import { renderUserInfo } from "./profile"
-
-const inputName = document.querySelector('.profile-edit-form__input_value_name')
-const inputJob = document.querySelector('.profile-edit-form__input_value_description')
-const profileEditForm = document.querySelector('.edit-form')
-const profileEditPopup = document.querySelector('.profile-edit-popup')
-
 // закрытие модальных окон клавишей Esc
 function handleEscape(e) {
   if (e.key === 'Escape') {
@@ -36,22 +27,7 @@ function hidePopup(popup) {
   document.body.removeEventListener('mousedown', handleMousedown)
 }
 
-// сохранение информации в профиле
-profileEditForm.addEventListener('submit', (e) => {
-  e.preventDefault()
-
-  updateProfileData(inputName.value, inputJob.value)
-    .then(checkResponse)
-    .then(renderUserInfo)
-    .catch(err => console.log(err))
-
-  hidePopup(profileEditPopup)
-})
-
 export {
   showPopup,
-  hidePopup,
-  profileEditPopup,
-  inputName,
-  inputJob
+  hidePopup
 }
