@@ -50,7 +50,8 @@ function deleteCard(id) {
     method: 'DELETE',
     headers: config.headers
   })
-    .catch(console.log)
+    .then(checkResponse)
+
 }
 
 // добавление лайка

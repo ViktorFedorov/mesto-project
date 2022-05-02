@@ -3,7 +3,6 @@ import { enableValidation, toggleSubmitButton } from "./components/forms-validat
 import { getProfileData } from "./components/api"
 import { renderUserInfo, setUserId } from "./components/profile"
 import { renderCards } from "./components/cards"
-import { checkResponse } from "./utils/utils";
 import { profileName, profileJob } from "./components/profile"
 import { showPopup, hidePopup } from "./components/modalWindows"
 import './pages/index.css'
@@ -34,7 +33,7 @@ addCardForm.addEventListener('submit', (e) => {
 
   addCard(inputPlaceName.value, inputPlaceUrl.value)
     .then(renderCards)
-    .catch((err => console.log(err)))
+    .catch(err => console.log(err))
 
   e.target.reset()
   toggleSubmitButton(addCardForm, settingsForDisableSendButton)
@@ -103,7 +102,7 @@ getProfileData()
 // загружаем карточки
 getCards()
   .then(renderCards)
-  .catch((err => console.log(err)))
+  .catch(err => console.log(err))
 
 // включаем валидацию всех форм
 enableValidation({

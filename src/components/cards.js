@@ -97,6 +97,7 @@ function confirmDelete(elem) {
   confirmDeletePopup.addEventListener('submit', (e) => {
     e.preventDefault()
     deleteCard(elem.getAttribute('data-id'))
+      .catch(err => console.log(err))
     elem.closest('.card').remove()
     hidePopup(confirmDeletePopup)
   })
