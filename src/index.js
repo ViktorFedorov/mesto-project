@@ -1,8 +1,9 @@
 import { getCards, addCard, updateAvatar, updateProfileData, getProfileData } from './components/api'
 import { enableValidation, toggleSubmitButton } from "./components/forms-validation"
 import { renderUserInfo, setUserId, profileName, profileJob } from "./components/profile"
-import { renderCards } from "./components/cards"
 import { showPopup, hidePopup } from "./components/modalWindows"
+import { renderCards } from "./components/cards"
+import { isLoading } from "./utils/utils"
 import './pages/index.css'
 
 const addCardPopup = document.querySelector('.add-card-popup')
@@ -29,24 +30,35 @@ const settingsForDisableSendButton = {
 addCardForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
+  // включаем индикатор загрузки
+  isLoading(e.target, true)
+
   addCard(inputPlaceName.value, inputPlaceUrl.value)
     .then(renderCards)
     .catch(err => console.log(err))
+    .finally(() => {
+      isLoading(e.target, false)
+      toggleSubmitButton(addCardForm, settingsForDisableSendButton)
+      hidePopup(addCardPopup)
+    })
 
   e.target.reset()
-  toggleSubmitButton(addCardForm, settingsForDisableSendButton)
-  hidePopup(addCardPopup)
 })
 
 // сохранение информации в профиле
 profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
+  // включаем индикатор загрузки
+  isLoading(e.target, true)
+
   updateProfileData(inputName.value, inputJob.value)
     .then(renderUserInfo)
     .catch(err => console.log(err))
-
-  hidePopup(profileEditPopup)
+    .finally(() => {
+      isLoading(e.target, false)
+      hidePopup(profileEditPopup)
+    })
 })
 
 // обновление аватара
@@ -55,13 +67,19 @@ avatarEditForm.addEventListener('submit', (e) => {
 
   const avatarUrl = e.target.querySelector('.profile-edit-form__input_avatar_url').value
 
+  // включаем индикатор загрузки
+  isLoading(e.target, true)
+
   updateAvatar(avatarUrl)
     .then(renderUserInfo)
     .catch(err => console.log(err))
+    .finally(() => {
+      isLoading(e.target, false)
+      toggleSubmitButton(addCardForm, settingsForDisableSendButton)
+      hidePopup(avatarEditPopup)
+    })
 
   e.target.reset()
-  toggleSubmitButton(e.target, settingsForDisableSendButton)
-  hidePopup(avatarEditPopup)
 })
 
 // открытие модального окна редактирования профиля
