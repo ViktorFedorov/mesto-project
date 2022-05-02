@@ -11,6 +11,10 @@
 
 - npm install
 - npm run dev
+-
+### Посмотреть, потрогать:
+
+https://viktorfedorov.github.io/mesto-project/
 
 
 Автор Федоров Виктор 2022
