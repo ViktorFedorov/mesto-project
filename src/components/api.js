@@ -1,90 +1,81 @@
 import { checkResponse } from "../utils/utils"
 
-const baseApiURL = 'https://mesto.nomoreparties.co/v1/plus-cohort-9'
-const authorizationToken = 'cfb5467c-bf03-4f53-98d0-54d36791533e'
+const config = {
+  baseApiURL: 'https://mesto.nomoreparties.co/v1/plus-cohort-9',
+  headers: {
+    authorizationToken: 'cfb5467c-bf03-4f53-98d0-54d36791533e',
+    'Content-Type': 'application/json',
+  }
+}
 
 // получение информации о пользователе
 function getProfileData() {
-  return fetch(`${baseApiURL}/users/me`, {
-    headers: { authorization: authorizationToken }
+  return fetch(`${config.baseApiURL}/users/me`, {
+    headers: config.headers
   })
     .then(checkResponse)
 }
 
 // обновление информации о пользователе
 function updateProfileData(name, about) {
-  return fetch(`${baseApiURL}/users/me`, {
+  return fetch(`${config.baseApiURL}/users/me`, {
     method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: authorizationToken
-    },
-    body: JSON.stringify({
-      name,
-      about
-    })
+    headers: config.headers,
+    body: JSON.stringify({ name, about })
   })
+    .then(checkResponse)
 }
 
 // загрузка карточек с сервера
 function getCards() {
-  return fetch(`${baseApiURL}/cards`, {
-    headers: { authorization: authorizationToken }
+  return fetch(`${config.baseApiURL}/cards`, {
+    headers: config.headers
   })
     .then(checkResponse)
 }
 
 // добавление карточки на сервер
 function addCard(name, link) {
-  return fetch(`${baseApiURL}/cards`, {
+  return fetch(`${config.baseApiURL}/cards`, {
     method: 'POST',
-    headers: {
-      authorization: authorizationToken,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name,
-      link
-    })
+    headers: config.headers,
+    body: JSON.stringify({ name, link })
   })
     .then(checkResponse)
 }
 
 // удаление карточки
 function deleteCard(id) {
-  fetch(`${baseApiURL}/cards/${id}`, {
+  fetch(`${config.baseApiURL}/cards/${id}`, {
     method: 'DELETE',
-    headers: { authorization: authorizationToken }
+    headers: config.headers
   })
     .catch(console.log)
 }
 
 // добавление лайка
 function addLikeToCard(id) {
-  return fetch(`${baseApiURL}/cards/likes/${id}`, {
+  return fetch(`${config.baseApiURL}/cards/likes/${id}`, {
     method: 'PUT',
-    headers: { authorization: authorizationToken }
+    headers: config.headers
   })
     .then(checkResponse)
 }
 
 // удаление лайка
 function removeLikeToCard(id) {
-  return fetch(`${baseApiURL}/cards/likes/${id}`, {
+  return fetch(`${config.baseApiURL}/cards/likes/${id}`, {
     method: 'DELETE',
-    headers: { authorization: authorizationToken }
+    headers: config.headers
   })
     .then(checkResponse)
 }
 
 // редактирование аватара
 function updateAvatar(avatar) {
-  return fetch(`${baseApiURL}/users/me/avatar`, {
+  return fetch(`${config.baseApiURL}/users/me/avatar`, {
     method: 'PATCH',
-    headers: {
-      authorization: authorizationToken,
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({ avatar })
   })
     .then(checkResponse)

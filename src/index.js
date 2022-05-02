@@ -46,7 +46,6 @@ profileEditForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
   updateProfileData(inputName.value, inputJob.value)
-    .then(checkResponse)
     .then(renderUserInfo)
     .catch(err => console.log(err))
 
