@@ -1,3 +1,4 @@
+const profileImage = document.querySelector('.profile__image')
 const profileName = document.querySelector('.profile__name')
 const profileJob = document.querySelector('.profile__description')
 
@@ -11,7 +12,6 @@ function setUserId(data) {
 
 // отображение информации о профиле пользователя в DOM
 function renderUserInfo({ name, about, avatar }) {
-  const profileImage = document.querySelector('.profile__image')
   profileImage.src = avatar
   profileName.textContent = name
   profileJob.textContent = about

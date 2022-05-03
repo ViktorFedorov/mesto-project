@@ -19,6 +19,11 @@ function checkOwnLikes(likesArray) {
   return likesArray.some(el => el._id === userId)
 }
 
+// переключает лайк
+function toggleLike(elem) {
+  elem.classList.toggle('card__like-btn_active')
+}
+
 // создание карточки
 function createCard(template, card) {
   // клонируем и заполняем элемент карточки
@@ -77,16 +82,17 @@ function handleClickLike(elem, id) {
       removeLikeToCard(id)
         .then(data => {
           setLike(elem, data.likes.length)
+          toggleLike(e.target)
         })
         .catch(err => console.log(err))
     } else {
       addLikeToCard(id)
         .then(data => {
           setLike(elem, data.likes.length)
+          toggleLike(e.target)
         })
         .catch(err => console.log(err))
     }
-    e.target.classList.toggle('card__like-btn_active')
   })
 }
 
@@ -97,10 +103,11 @@ function confirmDelete(elem) {
   confirmDeletePopup.addEventListener('submit', (e) => {
     e.preventDefault()
     deleteCard(elem.getAttribute('data-id'))
+      .then(() => {
+        elem.closest('.card').remove()
+        hidePopup(confirmDeletePopup)
+      })
       .catch(err => console.log(err))
-
-    elem.closest('.card').remove()
-    hidePopup(confirmDeletePopup)
   })
 }
 

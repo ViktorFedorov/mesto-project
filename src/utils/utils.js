@@ -17,7 +17,13 @@ function isLoading(elem, bool) {
   }
 }
 
+// очистка формы
+function resetForm(form) {
+  form.reset()
+}
+
 export {
   checkResponse,
-  isLoading
+  isLoading,
+  resetForm
 }

@@ -3,7 +3,7 @@ import { enableValidation, toggleSubmitButton } from "./components/forms-validat
 import { renderUserInfo, setUserId, profileName, profileJob } from "./components/profile"
 import { showPopup, hidePopup } from "./components/modalWindows"
 import { renderCards } from "./components/cards"
-import { isLoading } from "./utils/utils"
+import { isLoading, resetForm } from "./utils/utils"
 import './pages/index.css'
 
 const addCardPopup = document.querySelector('.add-card-popup')
@@ -34,15 +34,16 @@ addCardForm.addEventListener('submit', (e) => {
   isLoading(e.target, true)
 
   addCard(inputPlaceName.value, inputPlaceUrl.value)
-    .then(renderCards)
+    .then((cards) => {
+      renderCards(cards)
+      toggleSubmitButton(addCardForm, settingsForDisableSendButton)
+      hidePopup(addCardPopup)
+      resetForm(e.target)
+    })
     .catch(err => console.log(err))
     .finally(() => {
       isLoading(e.target, false)
-      toggleSubmitButton(addCardForm, settingsForDisableSendButton)
-      hidePopup(addCardPopup)
     })
-
-  e.target.reset()
 })
 
 // сохранение информации в профиле
@@ -53,11 +54,13 @@ profileEditForm.addEventListener('submit', (e) => {
   isLoading(e.target, true)
 
   updateProfileData(inputName.value, inputJob.value)
-    .then(renderUserInfo)
+    .then((userData) => {
+      renderUserInfo(userData)
+      hidePopup(profileEditPopup)
+    })
     .catch(err => console.log(err))
     .finally(() => {
       isLoading(e.target, false)
-      hidePopup(profileEditPopup)
     })
 })
 
@@ -71,15 +74,16 @@ avatarEditForm.addEventListener('submit', (e) => {
   isLoading(e.target, true)
 
   updateAvatar(avatarUrl)
-    .then(renderUserInfo)
+    .then((userData) => {
+      renderUserInfo(userData)
+      toggleSubmitButton(addCardForm, settingsForDisableSendButton)
+      hidePopup(avatarEditPopup)
+      resetForm(e.target)
+    })
     .catch(err => console.log(err))
     .finally(() => {
       isLoading(e.target, false)
-      toggleSubmitButton(addCardForm, settingsForDisableSendButton)
-      hidePopup(avatarEditPopup)
     })
-
-  e.target.reset()
 })
 
 // открытие модального окна редактирования профиля
@@ -109,15 +113,17 @@ popups.forEach((popup) => {
   })
 })
 
-// загружаем инфо о профиле с сервера
-getProfileData()
-  .then(setUserId)
-  .then(renderUserInfo)
-  .catch(err => console.log(err))
-
-// загружаем карточки
-getCards()
-  .then(renderCards)
+/*
+* загружаем инфо о профиле и карточках с сервера
+* Promise.all - исключает ситуацию когда id пользователя
+* еще не загрузился а катрочки уже отрендерелись
+* */
+Promise.all([getProfileData(), getCards()])
+  .then(([profileData, cardsData]) => {
+    setUserId(profileData)
+    renderUserInfo(profileData)
+    renderCards(cardsData)
+  })
   .catch(err => console.log(err))
 
 // включаем валидацию всех форм
